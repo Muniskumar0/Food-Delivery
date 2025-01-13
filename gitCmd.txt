@@ -6,6 +6,6 @@ git checkout yourBranchName
 
 git add .
 git commit -m "message"
-git push orgin yourBranchName
+git push origin yourBranchName
 git checkout main
 git merge yourBranchName

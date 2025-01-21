@@ -1,11 +1,11 @@
-import Cart from "./payment/Cart.jsx";
+import './App.css';
 
-
-
-export default function App() {
-  return(
-    <>
-      <Cart />
-    </>
-  )
+function App() {
+  return (
+      <>
+        <h1>Hello</h1>
+      </>
+  );
 }
+
+export default App;

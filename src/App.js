@@ -1,4 +1,4 @@
-import Cart from "./payment/Cart";
+import Cart from "./payment/Cart.jsx";
 
 
 

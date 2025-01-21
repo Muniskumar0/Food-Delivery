@@ -1,11 +1,11 @@
-import './App.css';
+import Cart from "./payment/Cart";
 
-function App() {
-  return (
-      <>
-        <h1>Hello</h1>
-      </>
-  );
+
+
+export default function App() {
+  return(
+    <>
+      <Cart />
+    </>
+  )
 }
-
-export default App;

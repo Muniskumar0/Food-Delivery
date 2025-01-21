@@ -36,3 +36,57 @@
     transform: rotate(360deg);
   }
 }
+
+.App {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  padding: 20px;
+}
+
+h1 {
+  color: #333;
+}
+
+.cart {
+  margin-top: 20px;
+}
+
+.cart-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+.cart-item .item-details h4 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.cart-item .item-details p {
+  margin: 5px 0;
+}
+
+.quantity-controls {
+  display: flex;
+  align-items: center;
+}
+
+.quantity-controls button {
+  padding: 5px 10px;
+  margin: 0 5px;
+  font-size: 16px;
+}
+
+.total {
+  margin-top: 20px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+h3 {
+  color: #333;
+}

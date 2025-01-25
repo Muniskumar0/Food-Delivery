@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import './Style.css'
 import img1 from   './img/pngwing.com.png'
-import { FaMinus, FaPlus } from "react-icons/fa";
+import { FaMinus, FaPlus, FaUser } from "react-icons/fa";
 import Payment from './pay-option';
+import { IoLocation } from 'react-icons/io5';
+import { FaWallet } from 'react-icons/fa6';
 
  
 
@@ -62,7 +64,7 @@ export default function Cart(){
             <div className="plus">
               <FaMinus onClick={deccrease} style={{color:'red',cursor:'pointer'}} /> <h4> {numbers} </h4> <FaPlus onClick={increase} style={{color:'green',cursor:'pointer'}} />
             </div>
-            <h4>${prices}</h4>
+            <h4> ${prices}</h4>
           </div>
           <div className="suggest">
             <input type="text" placeholder="Any suggestions?" />
@@ -83,6 +85,31 @@ export default function Cart(){
               <h2>Total : ${total}</h2>
               <button onClick={handlePayButtonClick}>TO PAY</button>
             </div>
+          </div>
+        </div>
+        <div className="container2">
+          <div className="account">
+            <FaUser style={{position:'absolute', left:'-20px', top:'10px', background:'white',padding:'15px',
+              boxShadow:'0px 1px 3px green',borderRadius:'20px'
+            }}/>
+            <h4>Account</h4>
+            <span>To place your order now, log in to your existing account or sign up.</span>
+            <div className='acc-btn'>
+              <button>You have account? <br /><span>SIGN IN</span></button>
+              <button>New account? <br /><span>SIGN UP</span></button>
+            </div>
+          </div>
+          <div className="address">
+          <IoLocation  style={{position:'absolute', left:'-20px', top:'10px', background:'white',padding:'15px',
+              boxShadow:'0px 1px 3px green',borderRadius:'20px'
+            }}/>
+            <h4>Delivery address</h4>
+          </div>
+          <div className="payment-option">
+          <FaWallet  style={{position:'absolute', left:'-20px', top:'10px', background:'white',padding:'15px',
+              boxShadow:'0px 1px 3px green',borderRadius:'20px'
+            }}/>
+            <h4>Payment</h4>
           </div>
         </div>
       </div>

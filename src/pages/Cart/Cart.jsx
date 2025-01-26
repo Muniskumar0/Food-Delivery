@@ -4,7 +4,7 @@ import img1 from './img/coco.png'
 import { FaMinus, FaPlus, FaUser } from "react-icons/fa";
 import { IoLocation } from 'react-icons/io5';
 import { FaWallet } from 'react-icons/fa6';
-import Navbar from '../comonents/navbar/Navbar';
+// import Navbar from '../comonents/navbar/Navbar';
 
  
 
@@ -41,9 +41,9 @@ export default function Cart(){
       
   return(
     <>
-    <div>
+    {/* <div>
       <Navbar numbers={numbers} />      
-    </div>
+    </div> */}
       <div className="container">
         <div className="container1">
           <div className="img">

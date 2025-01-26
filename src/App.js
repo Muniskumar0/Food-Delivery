@@ -1,11 +1,10 @@
 import './App.css';
-import Navbar from './comonents/navbar/Navbar';
+import Cart from './payment/cart';
 
 function App() {
   return (
-      <div className='app'>
-        <Navbar />
-      </div>
+
+        <Cart />
   );
 }
 

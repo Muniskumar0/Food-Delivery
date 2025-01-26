@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import './Style.css'
-import img1 from   './img/pngwing.com.png'
+import img1 from './img/coco.png'
 import { FaMinus, FaPlus, FaUser } from "react-icons/fa";
-import Payment from './pay-option';
 import { IoLocation } from 'react-icons/io5';
 import { FaWallet } from 'react-icons/fa6';
+import Navbar from '../comonents/navbar/Navbar';
 
  
 
@@ -15,7 +15,6 @@ export default function Cart(){
     const fee2 = 10;
     const [fee3,setFee3]=useState(0);
     const total =prices + fee1 + fee2 + parseInt(fee3)
-    const [isModalOpen, setIsModalOpen] = useState(false);
 
 
     const increase = ()=>{
@@ -39,18 +38,11 @@ export default function Cart(){
         setFee3(0);
       }
     }
-    
-    const handlePayButtonClick = () => {
-      setIsModalOpen(true);
-    };
-  
-    const closeModal = () => {
-      setIsModalOpen(false);
-    };
       
   return(
     <>
     <div>
+      <Navbar numbers={numbers} />      
     </div>
       <div className="container">
         <div className="container1">
@@ -85,7 +77,7 @@ export default function Cart(){
             <hr />
             <div className="pay">
               <h2>Total : ${total}</h2>
-              <button onClick={handlePayButtonClick}>TO PAY</button>
+              <button>TO PAY</button>
             </div>
           </div>
         </div>
@@ -115,7 +107,7 @@ export default function Cart(){
           </div>
         </div>
       </div>
-      {isModalOpen && <Payment onClose={closeModal} />}
     </>
   )
 }
+export {Cart}

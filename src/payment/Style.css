@@ -1,0 +1,235 @@
+body{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  background-color: whitesmoke;
+  
+}
+.container{
+  font-family: sans-serif;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  height: 100vh;
+}
+
+.container1{
+  width: 400px;
+  background-color: white;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  box-shadow: 0px 1px 2px;
+}
+
+.img{
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  overflow: hidden;
+}
+.img img{
+  height: 100px;
+  width: 100px;
+  border: 1px solid black;
+}
+
+.img .foodName{
+  border-bottom: 3px solid black;
+  padding-bottom: 10px;
+}
+
+.add{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.add .plus{
+  border: 1px solid green;
+  height: 30px;
+  width: 100px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+
+.suggest{
+  margin-top: 10px;
+  width: 95%;
+}
+
+.suggest input{
+  padding: 20px;
+  width: 100%;
+  background-color: whitesmoke;
+  border: none;
+  font-size: 15px;
+}
+
+
+.bill .bill-details, .tip{
+  display: grid;
+  grid-template-columns: auto auto;
+  gap: 20px;
+  justify-content: space-between;
+}
+
+.bill .tip input{
+  width: 40px;
+  padding: 5px;
+}
+
+.pay{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.pay button{
+  border: none;
+  width: 150px;
+  height: 50px;
+  font-size: 15px;
+  color: white;
+  font-weight: 600;
+  background-color: green;
+  border-radius: 5px;
+  box-shadow: 0px 1px 4px black;
+  cursor: pointer;
+  transition: all .2s;
+}
+
+.pay button:hover{
+  background-color: rgb(0, 173, 0);
+  transform: translateY(-1px);
+}
+
+
+.payContainer{
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.payBox{
+  width: 300px;
+  padding: 20px;
+  background-color: white;
+  text-align: center;
+  border-radius: 10px;
+}
+
+.payBox .btn{
+  display: block;
+  margin: 10px auto;
+  padding: 10px;
+  border-radius: 5px;
+  color: white;
+  width: 100%;
+  border: none;
+  cursor: pointer;
+  transition: all .2s;
+}
+
+.payBox .btn:hover{
+  box-shadow: 0px 1px 1px 1px black;
+}
+
+.payBox .gpay-btn{
+  background-color: rgb(0, 177, 0);
+}
+
+.payBox .paytm-btn{
+  background-color: rgb(0, 138, 218);
+}
+.payBox .phonePay-btn{
+  background-color: rgb(126, 0, 143);
+}
+
+.payBox .cancel-btn{
+  background-color: rgb(236, 0, 0);
+}
+
+@media screen and (min-width:0px) and (max-width:480px) {
+  body{
+    width: 100%;
+    padding: 20px;
+  }
+  .container{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 20px;
+    height: auto;
+  }
+  .container1{
+    width: 90%;
+  }
+  .container2{
+    width: 100%;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .add .plus{
+    margin-right: 20px;
+  }
+}
+
+
+.container2{
+  min-width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 40px;
+}
+
+.container2 .account, .address, .payment-option{
+  background-color: white;
+  padding: 30px;
+  box-shadow: 0px 0.5px 1px green;
+  position: relative;
+}
+
+.container2 .account{
+  display: flex;
+  flex-direction: column;
+  
+}
+
+.container2 .account .acc-btn{
+  display: flex;
+  gap: 30px;
+  margin-top: 30px;
+}
+
+.account button{
+  background: none;
+  border-color: green;
+  padding: 20px;
+  color: green;
+  cursor: pointer;
+  border-radius: 5px;
+  box-shadow: 0px 1px 1px;  
+}
+
+.account button:hover{
+  background-color: rgba(0, 128, 0, 0.815);
+  color: white;
+}
+
+.acc-btn button span{
+  font-weight: 800;
+}

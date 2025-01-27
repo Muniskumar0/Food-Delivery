@@ -9,12 +9,12 @@ const Navbar = ({ numbers }) => {
 
     return (
         <div className="navbar">
-            <h1 className="logo">FOOD DELIVERY</h1>
+            <h1 className="logo"><a href="/"> MAVY. </a></h1>
             <ul className="navbar-menu">
-                <Link to={'/'} ><li onClick={() => setMenu("home")} className={menu === "home" ? "active" : ""}>Home</li></Link>
-                <li onClick={() => setMenu("menu")} className={menu === "menu" ? "active" : ""}>Menu</li>
-                <li onClick={() => setMenu("about")} className={menu === "about" ? "active" : ""}>About</li>
-                <li onClick={() => setMenu("contact")} className={menu === "contact" ? "active" : ""}>Contact</li>
+                <Link to={'/'}  onClick={() => setMenu("home")} className={menu === "home" ? "active" : ""}>Home</Link>
+                <a href='#explore-menu' onClick={() => setMenu("menu")} className={menu === "menu" ? "active" : ""}>Menu</a>
+                <a href='#about' onClick={() => setMenu("about")} className={menu === "about" ? "active" : ""}>About</a>
+                <a href='#footer' onClick={() => setMenu("contact")} className={menu === "contact" ? "active" : ""}>Contact</a>
             </ul>
             <div className="navbar-right">
                 <img src={assets.search_icon} alt="" />

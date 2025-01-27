@@ -1,13 +1,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Roboto:ital,wght@1,700&display=swap');
 
 
-
-
 *{
+  font-family: Outfit;
+}
+
+body{
   padding: 0;
   margin: 0;
-  font-family: Outfit;
+  
   box-sizing: border-box;
+  background-color: whitesmoke;
+  scroll-behavior: smooth;
 }
 body{
   min-height: 100vh;

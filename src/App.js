@@ -8,7 +8,10 @@ import Footer from './comonents/Footer/Footer';
 function App() {
   return (
     <>
-    <Navbar />
+
+      <Navbar />
+
+    
     
     <div className="app">
     

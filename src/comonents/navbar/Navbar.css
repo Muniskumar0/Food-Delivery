@@ -1,6 +1,5 @@
 .navbar{
     padding: 20px 0px;
-
     font-size: 20px;
     font-weight: 500;
     display: flex;
@@ -141,3 +140,10 @@
     }
     
 }
+
+@media screen and (max-width:450px) {
+    .navbar{
+      box-shadow: none;
+
+    }
+  }

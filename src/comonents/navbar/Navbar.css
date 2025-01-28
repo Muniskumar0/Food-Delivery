@@ -1,18 +1,30 @@
 .navbar{
     padding: 20px 0px;
+    font-size: 20px;
+    font-weight: 500;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(10px);
+    box-shadow: 0px 0px 1px green;
 }
 .navbar .logo{
-    width: 150px;
+    font-size: 40px;
+    font-weight: 700;
+    color: green;
+    margin-right: 50px;
+  
 }
 .navbar-menu{
     display: flex;
     list-style: none;
     gap: 20px;
-    color: #49557e;
-    font-size: 18px;
+    color: #000000;
+    font-size: 20px;
+    
 
 }
 .navbar-right{
@@ -22,35 +34,116 @@
 }
 .navbar button{
     background: transparent;
-    font-size: 16px;
-    color: #49557e;
-    border: 1px solid tomato;
+    font-size: 18px;
+    color: black;
+    border: 1px solid green;
     padding: 10px 30px;
     border-radius: 50px;
     cursor: pointer;
     transition: 0.3s;
+    font-weight: 500;
+    
 }
 .navbar button:hover{
-    background-color: #fff4f2;
+    background-color: green;
+    color: white;
+    box-shadow: 0px 1px 5px 2px rgb(0, 155, 39);
 
 }
 .navbar .active{
     padding-bottom: 2px;
-    border-bottom:2px solid navy;
-    color: navy;
+    border-bottom:3px solid green;
+    color: green;
+    
 }
-.navbar li{
+.navbar .navbar-menu li{
     cursor: pointer;
+    transition: all .2s;
 }
+
+.navbar-menu li:hover{
+    transform: translateY(-2px);
+}
+
 .navbar-search-icon{
     position: relative;
 }
 .navbar-search-icon .dot{
     position: absolute;
-    min-width: 10px;
-    min-height: 10px;
-    background-color: tomato;
-    border-radius: 5px;
-    top: -8px;
-    right: -8px;
+    text-align: center;
+    color: white;
+    min-width: 25px;
+    min-height: 20px;
+    background-color: rgb(255, 0, 0);
+    border-radius: 50px;
+    top: -13px;
+    right: -20px;
 }
+
+.navbar-right .navbar-search-icon, img{
+    cursor: pointer;
+    transition: ease .2s;
+}
+.navbar-right .navbar-search-icon, img:hover{
+    transform: translateY(-2px);
+}
+@media (max-width:1050px) {
+
+    .navbar .logo{
+        width: 140;
+        
+    }
+    .navbar-menu{
+        gap: 20px;
+        font-size: 17px;
+    }
+    .navbar-right{
+        gap: 30px;
+    }
+    .navbar-right img{
+        width: 22px;
+
+    }
+    .navbar-right button{
+        padding: 8px 25px;
+    }
+}
+
+@media (max-width:900px) {
+
+    .navbar .logo{
+        width: 120;
+        
+    }
+    .navbar-menu{
+        gap: 15px;
+        font-size: 16px;
+    }
+    .navbar-right{
+        gap: 20px;
+    }
+    .navbar-right img{
+        width: 20px;
+
+    }
+    .navbar-right button{
+        padding: 7px 20px;
+        font-size: 15px;
+    }
+}
+
+@media (max-width:750px) {
+
+    .navbar-menu {
+        display: none;
+        
+    }
+    
+}
+
+@media screen and (max-width:450px) {
+    .navbar{
+      box-shadow: none;
+
+    }
+  }

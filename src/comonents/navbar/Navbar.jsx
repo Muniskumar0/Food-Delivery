@@ -4,7 +4,7 @@ import { assets } from "../../assets/frontend_assets/assets";
 import { Link } from "react-router-dom";
 
 // Update Navbar to accept props, specifically numbers
-const Navbar = ({ numbers }) => {
+const Navbar = ({setShowLogin}) => {
     const [menu, setMenu] = useState("home");
 
     return (
@@ -20,10 +20,10 @@ const Navbar = ({ numbers }) => {
                 <img src={assets.search_icon} alt="" />
                 <div className="navbar-search-icon">
                   <Link to={'/cart'} > <img src={assets.basket_icon}  alt="" /></Link> 
-                    <div className="dot">{numbers}
+                    <div className="dot">
                     </div>
                 </div>
-                <button>Sign In</button>
+                <button onClick={()=>setShowLogin(true)} >Sign In</button>
             </div>
         </div>
     );

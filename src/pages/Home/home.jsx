@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import './home.css'
 import Header from '../../comonents/header/header'
 import ExploreMenu from '../../comonents/ExploreMenu/ExploreMenu'
-// import FoodDisplay from '../../comonents/FoodDisplay/FoodDisplay'
+import FoodDisplay from '../../comonents/FoodDisplay/FoodDisplay'
 
 const Home = () => {
 
@@ -11,7 +11,7 @@ const Home = () => {
     <div>
       <Header/>
       <ExploreMenu category={category} setCategory={setCategory} />
-      {/* <FoodDisplay category={category} />  */}
+      <FoodDisplay category={category} /> 
     </div>
   )
 }

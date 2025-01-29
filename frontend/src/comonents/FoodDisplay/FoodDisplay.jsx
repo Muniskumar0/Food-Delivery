@@ -23,7 +23,7 @@ const FoodDisplay = ({ category }) => {
               />
             );
           }
-          return null; // Explicitly return null for unmatched cases
+          return null;
         })}
       </div>
     </div>

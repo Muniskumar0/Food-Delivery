@@ -54,6 +54,7 @@
 
 .explore-menu-list-item:hover {
     background-color: rgba(0, 161, 0, 0.089);
+}
 .explore-menu-list-item{
     padding: 10px;
 
@@ -75,5 +76,5 @@
     
     .explore-menu-list {
         max-width: 100%;
-        font-size: 14px;
+        font-size: 14px;}
 }

@@ -14,13 +14,9 @@ function App() {
   return (
     <>
     {showLogin?<LoginPopUp setShowLogin={setShowLogin}/>:<></>}
-<<<<<<< HEAD:frontend/src/App.js
-      <Navbar setShowLogin={setShowLogin}/>
-=======
+
     
       <Navbar setShowLogin={setShowLogin} setCategory={setCategory}/>
-      
->>>>>>> f12bd146a8af07447847840df79137e269aefb89:src/App.js
 
     <div className="app">
     

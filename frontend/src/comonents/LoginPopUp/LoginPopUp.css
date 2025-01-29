@@ -1,9 +1,6 @@
 .login-popup{
-<<<<<<< HEAD:frontend/src/comonents/LoginPopUp/LoginPopUp.css
     position: fixed;
-=======
     position: absolute;
->>>>>>> f12bd146a8af07447847840df79137e269aefb89:src/comonents/LoginPopUp/LoginPopUp.css
     z-index: 101;
     width: 100%;
     height: 100%;

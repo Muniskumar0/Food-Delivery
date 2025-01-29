@@ -75,6 +75,11 @@
     
     .explore-menu-list {
         max-width: 100%;
+<<<<<<< HEAD:frontend/src/comonents/ExploreMenu/ExploreMenu.css
         font-size: 14px;
     }
 }
+=======
+        font-size: 14px;}
+}
+>>>>>>> f12bd146a8af07447847840df79137e269aefb89:src/comonents/ExploreMenu/ExploreMenu.css

@@ -12,14 +12,14 @@ const Navbar = ({setShowLogin}) => {
             <h1 className="logo"><a href="/"> MAVY. </a></h1>
             <ul className="navbar-menu">
                 <Link to={'/'}  onClick={() => setMenu("home")} className={menu === "home" ? "active" : ""}>Home</Link>
-                <a href='#explore-menu' onClick={() => setMenu("menu")} className={menu === "menu" ? "active" : ""}>Menu</a>
+                <Link to={'/foodItem'} onClick={() => setMenu("menu")} className={menu === "menu" ? "active" : ""}>Menu</Link>
                 <a href='#about' onClick={() => setMenu("about")} className={menu === "about" ? "active" : ""}>About</a>
                 <a href='#footer' onClick={() => setMenu("contact")} className={menu === "contact" ? "active" : ""}>Contact</a>
             </ul>
             <div className="navbar-right">
                 <img src={assets.search_icon} alt="" />
                 <div className="navbar-search-icon">
-                  <Link to={'/cart'} > <img src={assets.basket_icon}  alt="" /></Link> 
+                  <Link to={'/Cart'} > <img src={assets.basket_icon}  alt="" /></Link> 
                     <div className="dot">
                     </div>
                 </div>

@@ -7,6 +7,7 @@ import FoodDisplay from './comonents/FoodDisplay/FoodDisplay';
 import { useState } from 'react';
 import LoginPopUp from './comonents/LoginPopUp/LoginPopUp';
 import Cart from './pages/Cart/Cart';
+import PlaceOrder from './pages/Placeorder/PlaceOrder';
 
 function App() {
   const [category,setCategory]=useState("All")
@@ -23,8 +24,10 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/cart" element={<Cart />} />
+        <Route path="/order" element={<PlaceOrder/>} />
 
-        <Route path="/foodItem" element={<FoodDisplay category={category} />} />
+
+        <Route path="/menu" element={<FoodDisplay category={category} />} />
         
       </Routes>
      

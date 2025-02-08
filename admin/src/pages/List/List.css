@@ -1,0 +1,133 @@
+.list {
+  font-family: 'Arial', sans-serif;
+  margin: 20px;
+  padding: 20px;
+  background-color: rgba(157, 255, 157, 0.24);
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 1200px; 
+  margin-left: auto; 
+  margin-right: auto;
+}
+
+h2 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 20px;
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+.loading, .empty {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #666;
+  margin-top: 50px;
+  font-weight: bold;
+}
+
+.list-table {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+.list-table-format {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr 1fr 1fr;
+  gap: 20px;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.308);
+  align-items: center;
+  justify-items: center;
+}
+
+.list-table-format.title {
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: #444;
+  text-transform: uppercase;
+  border-bottom: 2px solid #333;
+  margin-bottom: 10px;
+}
+
+.list-table-format img {
+  width: 120px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.list-table-format p {
+  font-size: 1.2rem;
+  color: #333;
+  margin: 0;
+}
+
+.list-table-format button {
+  background-color: rgb(211, 0, 0);
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  font-size: 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.list-table-format button:hover {
+  background-color: red;
+}
+
+.list-table-format button:focus {
+  outline: none;
+}
+
+@media (max-width: 768px) {
+  .list-table {
+    padding: 0 15px;
+  }
+
+  .list-table-format {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .list-table-format img {
+    width: 40px;
+    height: 40px;
+  }
+
+  .list-table-format p {
+    font-size: 0.9rem;
+  }
+
+  .list-table-format button {
+    padding: 6px 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .list-table-format {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .list-table-format img {
+    width: 30px;
+    height: 30px;
+  }
+
+  .list-table-format p {
+    font-size: 0.85rem;
+  }
+
+  .list-table-format button {
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+  }
+}

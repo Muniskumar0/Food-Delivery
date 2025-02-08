@@ -1,6 +1,7 @@
 import './SideBar.css'
 import { assets } from '../../assets/assets'
 import { NavLink } from 'react-router-dom'
+import { MdAddCircleOutline, MdOutlineFastfood, MdShoppingCart, MdSupervisedUserCircle } from "react-icons/md";
 
 const SideBar = () => {
 
@@ -8,19 +9,19 @@ const SideBar = () => {
     <div className='sidebar'>
       <div className="sidebar-options">
         <NavLink to='/add' className='sidebar-option'>
-          <img src={assets.add_icon} alt="" />
+        <MdAddCircleOutline className='icon'/>
           <p>Add Items</p>
         </NavLink>
         <NavLink to='/list' className='sidebar-option'>
-          <img src={assets.order_icon} alt="" />
+        <MdOutlineFastfood className='icon'/>
           <p>List Items</p>
         </NavLink>
         <NavLink to='/orders' className='sidebar-option'>
-          <img src={assets.order_icon} alt="" />
+          <MdShoppingCart className='icon'/>
           <p>Orders</p>
         </NavLink>
         <NavLink to='/users' className='sidebar-option'>
-          <img src={assets.order_icon} alt="" />
+          <MdSupervisedUserCircle className='icon'/>
           <p>Users</p>
         </NavLink>
       </div>
@@ -28,4 +29,4 @@ const SideBar = () => {
   )
 }
 
-export default SideBar
+export default SideBar;

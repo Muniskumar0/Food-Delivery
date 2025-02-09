@@ -34,20 +34,20 @@
 
 .sidebar-option:hover {
     background-color: #dfe4ea;
-    transform: translateX(3px);
+    transform: translateX(2px);
 }
 
-.sidebar-option img {
+.sidebar-option .icons {
     width: 20px;
     height: 20px;
     transition: transform 0.2s;
 }
 
-.sidebar-option.active p{
+.sidebar-option.active p,.icons{
     color: rgb(255, 255, 255);
 }
 
-.sidebar-option:hover img {
+.sidebar-option:hover .icons {
     transform: scale(1.1);
 }
 
@@ -56,9 +56,9 @@
         display: none;
     }
 
-    .sidebar:hover {
-        width: 250px;
-    }
+    /* .sidebar:hover {
+        width: 60px;
+    } */
 
     .sidebar-option {
         justify-content: center;
@@ -69,6 +69,6 @@
     background-color: green;
 }
 
-.sidebar-option.active img {
+.sidebar-option.active .icons {
     filter: invert(1); 
 }

@@ -1,93 +1,105 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './Add.css';
-import axios from 'axios';
 import { toast } from 'react-toastify';
 
 function Add() {
-
-  const url = "http://localhost:4000";
+  const url = "http://localhost:5000/data";
   const [image, setImage] = useState(null);
   const [data, setData] = useState({
     name: "",
     description: "",
     price: "",
-    category: "Pure Veg"
+    category: "Pure Veg",
+    image: ""
   });
 
-  const onChangeHandler = (event) => {
-    const name = event.target.name;
-    const value = event.target.value;
-    setData(data => ({ ...data, [name]: value }));
+  const convertToBase64 = (file) => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onloadend = () => resolve(reader.result);
+      reader.onerror = reject;
+      reader.readAsDataURL(file);
+    });
   };
 
-  const onSubmitHandler = async (event) => {
-    event.preventDefault();
-    const formData = new FormData();
-    formData.append("image", image);
-    formData.append("name", data.name);
-    formData.append("description", data.description);
-    formData.append("price", Number(data.price));
-    formData.append("category", data.category);
+  let foodDetails = async (e) => {
+    e.preventDefault();
+
+    let imageBase64 = '';
+    if (image) {
+      imageBase64 = await convertToBase64(image);
+    }
+
+    const updatedData = { ...data, image: imageBase64 };
 
     try {
-      const response = await axios.post(`${url}/api/food/add`, formData);
+      let res = await fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(updatedData),
+      });
 
-      if (response.data.success) {
-        setData({
-          name: "",
-          description: "",
-          price: "",
-          category: "Pure Veg"
-        });
-        setImage(null);
-        toast.success(response.data.message);
+      if (res.ok) {
+        toast.success("Food item added successfully");
       } else {
-        toast.error("Failed to add product. Please try again.");
+        toast.error("Error adding food item");
       }
     } catch (error) {
-      toast.error("Error occurred while adding product. Please try again later.");
+      console.error("Error fetching data: ", error);
+      toast.error("Error fetching food list.");
     }
   };
 
+  useEffect(() => {
+    console.log(data);
+  }, [data]);
+
   return (
-    <div className='add'>
-      <form className="flex-col" onSubmit={onSubmitHandler}>
+    <div className="add">
+      <form className="flex-col" onSubmit={foodDetails}>
         <div className="add-img-upload flex-col">
-          <p>Upload Image </p>
-          <label htmlFor='image'>
-            <img src={image ? URL.createObjectURL(image) : 'https://content.hostgator.com/img/weebly_image_sample.png'} alt="Upload"/>
+          <p>Upload Image</p>
+          <label htmlFor="image">
+            <img src={image ? URL.createObjectURL(image) : 'https://content.hostgator.com/img/weebly_image_sample.png'} alt="Upload" />
           </label>
-          <input
-            type="file" id='image' hidden required onChange={(e) => setImage(e.target.files[0])}/>
+          <input type="file" id="image" name="image" hidden required onChange={(e) => {
+              const selectedImage = e.target.files[0];
+              setImage(selectedImage);
+              setData({ ...data, image: selectedImage });
+            }}/>
         </div>
+
         <div className="add-product-name flex-col">
           <p>Product Name</p>
-          <input
-            onChange={onChangeHandler} value={data.name} type="text" name='name' placeholder='Type here'/>
+          <input onChange={(e) => setData({ ...data, [e.target.name]: e.target.value })} value={data.name} type="text" name="name" placeholder="Type here"/>
         </div>
+
         <div className="add-product-description flex-col">
           <p>Product Description</p>
-          <textarea
-              onChange={onChangeHandler} value={data.description} name="description" rows='6' placeholder='Write content here' required>
-          </textarea>
+          <textarea onChange={(e) => setData({ ...data, [e.target.name]: e.target.value })} value={data.description} name="description" rows="6" placeholder="Write content here" required/>
         </div>
+
         <div className="add-category-price">
           <div className="add-category flex-col">
             <p>Product Category</p>
-            <select onChange={onChangeHandler} name="category" value={data.category}>
-              <option value="Salad">Pure Veg</option>
-              <option value="Rolls">Non Veg</option>
-              <option value="Deserts">Fast Food</option>
-              <option value="Sandwich">Sweets</option>
+            <select onChange={(e) => setData({ ...data, [e.target.name]: e.target.value })} name="category" value={data.category}>
+              <option value="Pure Veg">Pure Veg</option>
+              <option value="Non Veg">Non Veg</option>
+              <option value="Fast Food">Fast Food</option>
+              <option value="Sweets">Sweets</option>
               <option value="Cake">Cake</option>
             </select>
           </div>
+
           <div className="add-price flex-col">
             <p>Product Price</p>
-            <input type="number" onChange={onChangeHandler} value={data.price} name="price" placeholder='$20'/>
+            <input type="number" onChange={(e) => setData({ ...data, [e.target.name]: e.target.value })} value={data.price} name="price" placeholder="₹99"/>
           </div>
         </div>
-        <button type='submit' className='add-btn'>Add</button>
+
+        <button type="submit" className="add-btn">Add</button>
       </form>
     </div>
   );

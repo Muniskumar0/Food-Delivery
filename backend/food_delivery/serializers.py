@@ -9,4 +9,4 @@ class UserDataSerializer(serializers.ModelSerializer):
 class FoodListSerializer(serializers.ModelSerializer):
     class Meta:
         model = FoodList
-        fields = '__all__'  
+        fields = '__all__'

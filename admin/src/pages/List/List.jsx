@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import './List.css'; // Ensure the professional CSS is applied
+import './List.css'; 
 import axios from 'axios';
 import { toast } from 'react-toastify';
 
 function List() {
-  const url = "http://localhost:5000/data";
+  const url = "http://127.0.0.1:8000/food/";
   const [list, setList] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -16,7 +16,7 @@ function List() {
     try {
       const response = await axios.get(url);
       if (response.data) {
-        setList(response.data); // Assuming response.data contains the list of food items
+        setList(response.data);
       } else {
         toast.error("No food data available");
       }
@@ -24,18 +24,27 @@ function List() {
       console.error("Error fetching food list:", error);
       toast.error("Error fetching food list.");
     } finally {
-      setLoading(false); // Stop loading spinner
+      setLoading(false);
     }
   };
 
   const handleDelete = async (id) => {
-    try {
-      await axios.delete(`${url}/${id}`);
-      setList(list.filter(item => item.id !== id)); // Remove the deleted item from the list
-      toast.success("Food item deleted successfully!");
-    } catch (error) {
-      console.error("Error deleting item:", error);
-      toast.error("Error deleting food item.");
+    if (id) {
+      try {
+        const response = await axios.delete(`http://127.0.0.1:8000/food/${id}/`);
+        if (response.status === 204) {
+          setList(list.filter(item => item.id !== id)); // Remove the deleted item from the list
+          toast.success("Food item deleted successfully!");
+        } else {
+          toast.error("Failed to delete the food item.");
+        }
+      } catch (error) {
+        console.error("Error deleting item:", error);
+        toast.error("Error deleting food item.");
+      }
+    } else {
+      console.error("ID is undefined. Cannot delete item.");
+      toast.error("Invalid food item ID.");
     }
   };
 
@@ -57,7 +66,13 @@ function List() {
           </div>
           {list.map((item) => (
             <div className="list-table-format" key={item.id}>
-              <img src={item.image} alt={item.name} />
+              <img 
+                src={`http://127.0.0.1:8000${item.image}`} 
+                alt={item.name} 
+                width={50} 
+                height={50} 
+                style={{ objectFit: 'cover' }}
+              />
               <p>{item.name}</p>
               <p>{item.category}</p>
               <p>₹ {item.price}</p>

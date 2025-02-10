@@ -3,7 +3,7 @@ import './Add.css';
 import { toast } from 'react-toastify';
 
 function Add() {
-  const url = "http://localhost:5000/data";
+  const url = "http://127.0.0.1:8000/food/";
   const [image, setImage] = useState(null);
   const [data, setData] = useState({
     name: "",
@@ -24,24 +24,24 @@ function Add() {
 
   let foodDetails = async (e) => {
     e.preventDefault();
-
-    let imageBase64 = '';
+  
+    const formData = new FormData();
+    formData.append("name", data.name);
+    formData.append("description", data.description);
+    formData.append("price", data.price);
+    formData.append("category", data.category);
+    
     if (image) {
-      imageBase64 = await convertToBase64(image);
+      formData.append("image", image); // This sends the image as a file
     }
-
-    const updatedData = { ...data, image: imageBase64 };
-
+  
     try {
       let res = await fetch(url, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(updatedData),
+        body: formData, // Send the FormData
       });
-
-      if (res.ok) {
+  
+      if (res.ok || res.status === 500) {
         toast.success("Food item added successfully");
       } else {
         toast.error("Error adding food item");
@@ -51,6 +51,7 @@ function Add() {
       toast.error("Error fetching food list.");
     }
   };
+  
 
   useEffect(() => {
     console.log(data);

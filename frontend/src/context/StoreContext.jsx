@@ -1,55 +1,77 @@
-import { createContext, useState } from "react";
-import { food_list } from "../assets/frontend_assets/assets";
-export const StoreContext = createContext(null);
+import { createContext, useEffect, useState } from "react";
+import axios from "axios";
 
+export const StoreContext = createContext(null);
 
 const StoreContextProvider = (props) => {
     const [cartItem, setCartItem] = useState({});
+    const [food_list, setFoodList] = useState([]);
+    const urls = "http://127.0.0.1:8000/food/";
 
     const addToCart = (itemId) => {
-        if (!cartItem[itemId]) {
-            setCartItem((prev) => ({ ...prev, [itemId]: 1 }));
-        } else {
-            setCartItem((prev) => ({ ...prev, [itemId]: prev[itemId] + 1 }));
-        }
-    }
+        const itemKey = String(itemId); // Convert to string for consistency
+        setCartItem((prev) => ({
+            ...prev,
+            [itemKey]: (prev[itemKey] || 0) + 1
+        }));
+
+        console.log("Cart Updated:", cartItem);
+    };
 
     const removeFromCart = (itemId) => {
-        setCartItem((prev) => ({ ...prev, [itemId]: prev[itemId] - 1 }));
+        const itemKey = String(itemId);
+        setCartItem((prev) => {
+            const updatedCart = { ...prev };
+            if (updatedCart[itemKey] > 1) {
+                updatedCart[itemKey] -= 1;
+            } else {
+                delete updatedCart[itemKey];
+            }
+            return updatedCart;
+        });
 
-    }
-
+        console.log("Cart Updated:", cartItem);
+    };
 
     const getTotalCartAmount = () => {
         let total = 0;
         for (const key in cartItem) {
             if (cartItem[key] > 0) {
-
-                let keyInfo = food_list.find((product) => product._id === key)
-                total += keyInfo.price * cartItem[key];
+                let keyInfo = food_list.find((product) => String(product.id) === key); // Ensure ID match
+                if (keyInfo) {
+                    total += keyInfo.price * cartItem[key];
+                }
             }
-
         }
         return total;
+    };
 
-    }
-
-
-
-        const contextValue = {
-            food_list,
-            cartItem,
-            setCartItem,
-            addToCart,
-            removeFromCart,
-            getTotalCartAmount
-
-
+    const fetchFoodList = async () => {
+        try {
+            const response = await axios.get(urls);
+            console.log("API Response:", response.data);
+            setFoodList(response.data);
+        } catch (error) {
+            console.error("Error fetching food list:", error);
         }
-        return (
-            <StoreContext.Provider value={contextValue}>
-                {props.children}
-            </StoreContext.Provider>
-        )
-    }
-    export default StoreContextProvider
+    };
+
+    useEffect(() => {
+        fetchFoodList();
+    }, []);
+
+
+    
+
+    return (
+        <StoreContext.Provider value={{ food_list, cartItem, addToCart, removeFromCart, getTotalCartAmount }}>
+            {props.children}
+        </StoreContext.Provider>
+    );
+};
+
+export default StoreContextProvider;
+
+
+
+   

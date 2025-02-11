@@ -1,12 +1,12 @@
 from django.db import models
 
-# UserData Model to store user information
 class UserData(models.Model):
-    user_name = models.CharField(max_length=50, null=True)
-    user_pass = models.CharField(max_length=50, null=True)
+    username = models.CharField(max_length=100, unique=True, default="default_user")
+    email = models.EmailField(unique=True, default="default@example.com")
+    password = models.CharField(max_length=100, default="default_password")
 
     def __str__(self):
-        return f"{self.user_name} {self.user_pass}"
+        return f"{self.username} {self.email} {self.password}"
     
 class FoodList(models.Model):
     CATEGORY_CHOICES = [

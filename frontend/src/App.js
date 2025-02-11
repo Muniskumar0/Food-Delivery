@@ -8,7 +8,6 @@ import { useState } from 'react';
 import LoginPopUp from './comonents/LoginPopUp/LoginPopUp';
 import Cart from './pages/Cart/Cart';
 import PlaceOrder from './pages/Placeorder/PlaceOrder';
-import Category from './comonents/Category/Category';
 
 function App() {
   const [category,setCategory]=useState("All")
@@ -20,7 +19,6 @@ function App() {
     
       <Navbar setShowLogin={setShowLogin} setCategory={setCategory}/>
 
-      {/* <Category /> */}
     <div className="app">
     
       <Routes>

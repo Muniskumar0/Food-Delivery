@@ -9,7 +9,7 @@ const StoreContextProvider = (props) => {
     const urls = "http://127.0.0.1:8000/food/";
 
     const addToCart = (itemId) => {
-        const itemKey = String(itemId); // Convert to string for consistency
+        const itemKey = String(itemId);
         setCartItem((prev) => ({
             ...prev,
             [itemKey]: (prev[itemKey] || 0) + 1
@@ -37,7 +37,7 @@ const StoreContextProvider = (props) => {
         let total = 0;
         for (const key in cartItem) {
             if (cartItem[key] > 0) {
-                let keyInfo = food_list.find((product) => String(product.id) === key); // Ensure ID match
+                let keyInfo = food_list.find((product) => String(product.id) === key); 
                 if (keyInfo) {
                     total += keyInfo.price * cartItem[key];
                 }

@@ -21,16 +21,16 @@ const Cart = () => {
                 <br />
                 <hr />
                 {food_list.map((item) => {
-                    if (cartItem[item._id] > 0) {
+                    if (cartItem[item.id] > 0) {
                         return (
                             <><div>
-                                <div key={item._id} className="cart-items-title cart-items-item">
-                                    <img src={item.image} alt={item.name} />
+                                <div key={item.id} className="cart-items-title cart-items-item">
+                                    <img src={`http://127.0.0.1:8000${item.image}`} alt={item.name} />
                                     <p>{item.name}</p>
                                     <p>{item.price}</p>
-                                    <p>{cartItem[item._id]}</p>
-                                    <p>{item.price * cartItem[item._id]}</p>
-                                    <p className="cross" onClick={() => removeFromCart(item._id)}>X</p>
+                                    <p>{cartItem[item.id]}</p>
+                                    <p>{item.price * cartItem[item.id]}</p>
+                                    <p className="cross" onClick={() => removeFromCart(item.id)}>X</p>
                                 </div>
                             </div><hr /></>
                         )

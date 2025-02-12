@@ -10,37 +10,29 @@ import Cart from './pages/Cart/Cart';
 import PlaceOrder from './pages/Placeorder/PlaceOrder';
 
 function App() {
-  const [category,setCategory]=useState("All")
-  const[showLogin,setShowLogin]=useState(false)
+  const [category, setCategory] = useState("All");
+  const [showLogin, setShowLogin] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false); // Track login state
+
   return (
     <>
-    {showLogin?<LoginPopUp setShowLogin={setShowLogin}/>:<></>}
+      {/* Show Login Popup if user clicks login button */}
+      {showLogin && <LoginPopUp setShowLogin={setShowLogin} setIsLoggedIn={setIsLoggedIn} />}
 
-    
-      <Navbar setShowLogin={setShowLogin} setCategory={setCategory}/>
+      <Navbar setShowLogin={setShowLogin} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
 
-    <div className="app">
-    
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/cart" element={<Cart />} />
-        <Route path="/order" element={<PlaceOrder/>} />
+      <div className="app">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/cart" element={<Cart isLoggedIn={isLoggedIn} setShowLogin={setShowLogin} />} />
+          <Route path="/order" element={<PlaceOrder />} />
+          <Route path="/menu" element={<FoodDisplay category={category} />} />
+        </Routes>
+      </div>
 
-
-        <Route path="/menu" element={<FoodDisplay category={category} />} />
-
-
-      </Routes>
-      {/* <input type='search' className='search-bar' placeholder='Search your food...' /> */}
-    </div>
-    <Footer/>
-    
-
+      <Footer />
     </>
-    );
-
-  }
-      
-
+  );
+}
 
 export default App;

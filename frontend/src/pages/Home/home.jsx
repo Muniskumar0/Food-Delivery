@@ -4,6 +4,9 @@ import Header from '../../comonents/header/header'
 import ExploreMenu from '../../comonents/ExploreMenu/ExploreMenu'
 // import FoodDisplay from '../../comonents/FoodDisplay/FoodDisplay'
 
+
+
+
 const Home = () => {
 
   const [category,setCategory]=useState("All")

@@ -80,7 +80,7 @@
     right: -20px;
 }
 
-.navbar-right .navbar-search-icon, img{
+.navbar-right .navbar-search-icon, .icons{
     cursor: pointer;
     transition: ease .2s;
 }
@@ -100,10 +100,7 @@
     .navbar-right{
         gap: 30px;
     }
-    .navbar-right img{
-        width: 22px;
 
-    }
     .navbar-right button{
         padding: 8px 25px;
     }
@@ -122,10 +119,7 @@
     .navbar-right{
         gap: 20px;
     }
-    .navbar-right img{
-        width: 20px;
 
-    }
     .navbar-right button{
         padding: 7px 20px;
         font-size: 15px;

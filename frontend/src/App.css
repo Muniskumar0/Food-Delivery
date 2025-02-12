@@ -1,2 +1,13 @@
+.search-bar{
+    width: 100%;
+    padding: 15px;
+    font-size: 1.5rem;
+    border-radius: 10px;
+    border: 1px solid black;
+    margin-top: 30px;
+    outline-color: green;
+}
+
+
 
 

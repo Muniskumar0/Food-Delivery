@@ -28,9 +28,10 @@ function App() {
 
 
         <Route path="/menu" element={<FoodDisplay category={category} />} />
-        
+
+
       </Routes>
-     
+      {/* <input type='search' className='search-bar' placeholder='Search your food...' /> */}
     </div>
     <Footer/>
     

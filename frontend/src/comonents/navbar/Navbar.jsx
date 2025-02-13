@@ -7,7 +7,7 @@ import { IoSearch } from "react-icons/io5";
 
 const Navbar = ({ setShowLogin, isLoggedIn, setIsLoggedIn }) => {
     const [menu, setMenu] = useState("home");
-    const { getTotalCartAmount, cartItem } = useContext(StoreContext);
+    const { cartItem } = useContext(StoreContext);
     const totalItems = Object.values(cartItem).reduce((acc, qty) => acc + qty, 0);
 
     const [username, setUsername] = useState("");

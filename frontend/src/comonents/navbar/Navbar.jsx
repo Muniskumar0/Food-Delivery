@@ -1,13 +1,30 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import './Navbar.css';
-import { assets } from "../../assets/frontend_assets/assets";
 import { Link } from "react-router-dom";
 import { StoreContext } from "../../context/StoreContext";
+import { BsCartCheckFill } from "react-icons/bs";
+import { IoSearch } from "react-icons/io5";
 
-// Update Navbar to accept props, specifically numbers
-const Navbar = ({setShowLogin}) => {
+const Navbar = ({ setShowLogin, isLoggedIn, setIsLoggedIn }) => {
     const [menu, setMenu] = useState("home");
-    const {getTotalCartAmount}=useContext(StoreContext);
+    const { getTotalCartAmount, cartItem } = useContext(StoreContext);
+    const totalItems = Object.values(cartItem).reduce((acc, qty) => acc + qty, 0);
+
+    const [username, setUsername] = useState("");
+
+    useEffect(() => {
+   
+        const storedUsername = localStorage.getItem("username");
+        if (storedUsername) {
+            setUsername(storedUsername);
+        }
+    }, [isLoggedIn]);
+
+    const handleLogout = () => {
+        setIsLoggedIn(false);
+        localStorage.removeItem("username"); 
+        setUsername("");
+    };
 
     return (
         <div className="navbar">
@@ -18,14 +35,24 @@ const Navbar = ({setShowLogin}) => {
                 <a href='#about' onClick={() => setMenu("about")} className={menu === "about" ? "active" : ""}>About</a>
                 <a href='#footer' onClick={() => setMenu("contact")} className={menu === "contact" ? "active" : ""}>Contact</a>
             </ul>
-            <div className="navbar-right">
-                <img src={assets.search_icon} alt="" />
-                <div className="navbar-search-icon">
-                  <Link to={'/Cart'} > <img src={assets.basket_icon}  alt="" /></Link> 
-                    <div className={getTotalCartAmount()===0?"":"dot"}>
+            <div className="navbar-right icons">
+                <IoSearch style={{fontSize:"30px"}} />
+                <div className="navbar-search-icon icons">
+                  <Link to={'/Cart'}><BsCartCheckFill style={{fontSize:"30px"}} /></Link> 
+                    <div className={totalItems === 0 ? "" : "dot"}>
+                      {totalItems > 0 && <span>{totalItems}</span>}
                     </div>
                 </div>
-                <button onClick={()=>setShowLogin(true)} >Sign In</button>
+                
+                {isLoggedIn ? (
+                    <div className="navbar-user">
+                        <span>👤 {username}</span>
+                        
+                        <button onClick={handleLogout}>Logout</button>
+                    </div>
+                ) : (
+                    <button onClick={() => setShowLogin(true)}>Sign In</button>
+                )}
             </div>
         </div>
     );

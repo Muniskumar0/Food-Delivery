@@ -1,110 +1,172 @@
 import React, { useState } from 'react';
 import "./LoginPopUp.css";
 import { assets } from '../../assets/frontend_assets/assets';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
-
-
-
-
-const LoginPopUp = ({ setShowLogin }) => {
+const LoginPopUp = ({ setShowLogin, setIsLoggedIn }) => {
     const [currentState, setCurrentState] = useState("Login");
+    const [loading, setLoading] = useState(false);
+
     const [registerValues, setRegisterValues] = useState({
-        id: 0,
         username: "",
         email: "",
         password: ""
-
     });
+
     const [loginUser, setLoginUser] = useState({
         username: "",
         password: ""
     });
 
 
+    const handleInputChange = (e, type) => {
+        const { name, value } = e.target;
+        if (type === "register") {
+            setRegisterValues(prev => ({ ...prev, [name]: value }));
+        } else {
+            setLoginUser(prev => ({ ...prev, [name]: value }));
+        }
+    };
 
-
-    function userResister(e) {
+    const userRegister = async (e) => {
         e.preventDefault();
-        
+        if (!registerValues.username || !registerValues.email || !registerValues.password) {
+            toast.error("Please fill in all fields!");
+            return;
+        }
 
-        fetch("http://127.0.0.1:8000/users/", {  
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(registerValues),
-        })
-            .then((response) => {
-                if (!response.ok) {
-                    return response.json().then(err => { throw new Error(JSON.stringify(err)) });
-                }
-                return response.json();
-            })
-            .then((data) => {
+        setLoading(true);
+        try {
+            const response = await fetch("http://127.0.0.1:8000/users/", {  
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(registerValues),
+            });
 
-                console.log("User registered:", data);
-                alert("User registered successfully!");
-                setCurrentState("Login")
-            })
-            .catch((error) =>{
-                 console.error("Error:", error);
-                 alert("User not registered")
-                });
-    }
+            if (!response.ok) {
+                throw new Error("Registration failed");
+            }
 
+            toast.success("User registered successfully!");
+            setCurrentState("Login");
+        } catch (error) {
+            toast.error("User registration failed!");
+            console.error("Error:", error);
+        } finally {
+            setLoading(false);
+        }
+    };
 
-    function userLogin(e) {
+    const userLogin = async (e) => {
         e.preventDefault();
-        fetch("http://127.0.0.1:8000/users/")
- 
-            .then((res) => res.json())
-            .then((data) => {
-                let details = data.find((item) => item.username === loginUser.username && item.password === loginUser.password)
-                if (details) {
-                    alert("Successfully logged in");
-                    
-                } else {
-                    alert("Invalid username or password");
-                }
+        if (!loginUser.username || !loginUser.password) {
+            toast.error("Please enter both username and password!");
+            return;
+        }
 
-            })
-            .catch((error) => console.error("Error fetching data", error));
-    }
+        setLoading(true);
+        try {
+            const response = await fetch("http://127.0.0.1:8000/users/");
+            const data = await response.json();
+
+            const userDetails = data.find(
+                item => item.username === loginUser.username && item.password === loginUser.password
+            );
+
+            if (userDetails) {
+                toast.success("Successfully logged in!");
+                setIsLoggedIn(true);  
+                localStorage.setItem("username", userDetails.username);
+                setTimeout(() => {
+                    setShowLogin(false);
+                }, 2000);
+            } else {
+                toast.error("Invalid username or password!");
+            }
+        } catch (error) {
+            console.error("Error fetching data", error);
+            toast.error("Login failed!");
+        } finally {
+            setLoading(false);
+        }
+    };
 
     return (
         <div className='login-popup'>
-
-            <form className='login-popup-container'>
+            <form className='login-popup-container' onSubmit={currentState === "Sign Up" ? userRegister : userLogin}>
                 <div className="login-popup-title">
                     <h2>{currentState}</h2>
-                    <img onClick={() => setShowLogin(false)} src={assets.cross_icon} alt="" />
+                    <img onClick={() => setShowLogin(false)} src={assets.cross_icon} alt="Close" />
                 </div>
+
                 <div className="login-popup-inputs">
                     {currentState === "Login" ? (
                         <>
-                            <input type="text" placeholder='Enter your name' value={loginUser.username} required onChange={(e) => setLoginUser({ ...loginUser, username: e.target.value })} />
-                            <input type="password" placeholder='Enter your password' value={loginUser.password} required onChange={(e) => setLoginUser({ ...loginUser, password: e.target.value })} />
+                            <input 
+                                type="text" 
+                                name="username"
+                                placeholder='Enter your username' 
+                                value={loginUser.username} 
+                                required 
+                                onChange={(e) => handleInputChange(e, "login")}
+                            />
+                            <input 
+                                type="password" 
+                                name="password"
+                                placeholder='Enter your password' 
+                                value={loginUser.password} 
+                                required 
+                                onChange={(e) => handleInputChange(e, "login")}
+                            />
                         </>
                     ) : (
                         <>
-                            <input type="text" placeholder='Your name' value={registerValues.username} required onChange={(e) => setRegisterValues({ ...registerValues, username: e.target.value })} />
-                            <input type="email" placeholder='Enter your email' value={registerValues.email} required onChange={(e) => setRegisterValues({ ...registerValues, email: e.target.value })} />
-                            <input type="password" placeholder='Enter your password' value={registerValues.password} required onChange={(e) => setRegisterValues({ ...registerValues, password: e.target.value })} />
+                            <input 
+                                type="text" 
+                                name="username"
+                                placeholder='Your username' 
+                                value={registerValues.username} 
+                                required 
+                                onChange={(e) => handleInputChange(e, "register")}
+                            />
+                            <input 
+                                type="email" 
+                                name="email"
+                                placeholder='Enter your email' 
+                                value={registerValues.email} 
+                                required 
+                                onChange={(e) => handleInputChange(e, "register")}
+                            />
+                            <input 
+                                type="password" 
+                                name="password"
+                                placeholder='Enter your password' 
+                                value={registerValues.password} 
+                                required 
+                                onChange={(e) => handleInputChange(e, "register")}
+                            />
                         </>
                     )}
                 </div>
-                <button className='log-btn' onClick={currentState === "Sign Up" ? userResister : userLogin}>
-                    {currentState === 'Sign Up' ? "Create your account" : "Login"}
+
+                <button className='log-btn' type="submit" disabled={loading}>
+                    {loading ? "Processing..." : (currentState === 'Sign Up' ? "Create your account" : "Login")}
                 </button>
+
                 <div className="login-popup-condition">
                     <input type="checkbox" required />
                     <p>By continuing, I agree to the terms of use & privacy policy</p>
                 </div>
-                {currentState === "Login"
-                    ? <p>Create a new account? <span onClick={() => setCurrentState("Sign Up")}>Click here</span></p>
-                    : <p>Already have an account? <span onClick={() => setCurrentState("Login")}>Login here</span></p>
-                }
+
+                {currentState === "Login" ? (
+                    <p>Create a new account? <span onClick={() => setCurrentState("Sign Up")}>Click here</span></p>
+                ) : (
+                    <p>Already have an account? <span onClick={() => setCurrentState("Login")}>Login here</span></p>
+                )}
             </form>
+
+            <ToastContainer />
         </div>
     );
 }

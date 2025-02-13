@@ -1,0 +1,119 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.order-container {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.order-header {
+  background-color: green;
+  padding: 10px;
+  text-align: center;
+}
+
+.order-header h2 {
+  margin: 0;
+  color: white;
+}
+
+.order-list {
+  padding: 20px;
+}
+
+.order-item {
+  background-color: #fff;
+  padding: 20px;
+  border-bottom: 1px solid #ddd;
+}
+
+.order-item:last-child {
+  border-bottom: none;
+}
+
+.order-item h3 {
+  margin-top: 0;
+}
+
+.order-item p {
+  margin-bottom: 10px;
+}
+
+.order-item strong {
+  font-weight: bold;
+}
+
+.order-item .order-details {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.order-item .order-details div {
+  width: 45%;
+}
+
+.order-item .order-details div:last-child {
+  text-align: right;
+}
+
+.loading {
+  text-align: center;
+  padding: 20px;
+}
+
+.error {
+  text-align: center;
+  padding: 20px;
+  color: #f00;
+}
+
+@media only screen and (max-width: 768px) {
+  .order-container {
+    max-width: 100%;
+    padding: 10px;
+  }
+  .order-item .order-details {
+    flex-direction: column;
+  }
+  .order-item .order-details div {
+    width: 100%;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .order-container {
+    padding: 5px;
+  }
+  .order-item {
+    padding: 10px;
+  }
+  .order-item h3 {
+    font-size: 18px;
+  }
+  .order-item p {
+    font-size: 16px;
+  }
+}
+
+@media only screen and (max-width: 320px) {
+  .order-container {
+    padding: 0;
+  }
+  .order-item {
+    padding: 5px;
+  }
+  .order-item h3 {
+    font-size: 16px;
+  }
+  .order-item p {
+    font-size: 14px;
+  }
+}

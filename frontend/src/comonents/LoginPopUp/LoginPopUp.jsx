@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import "./LoginPopUp.css";
 import { assets } from '../../assets/frontend_assets/assets';
 import { ToastContainer, toast } from "react-toastify";
@@ -7,18 +7,13 @@ import "react-toastify/dist/ReactToastify.css";
 const LoginPopUp = ({ setShowLogin, setIsLoggedIn }) => {
     const [currentState, setCurrentState] = useState("Login");
     const [loading, setLoading] = useState(false);
+    const [registerValues, setRegisterValues] = useState({ username: "", email: "", password: "" });
+    const [loginUser, setLoginUser] = useState({ username: "", password: "" });
 
-    const [registerValues, setRegisterValues] = useState({
-        username: "",
-        email: "",
-        password: ""
-    });
-
-    const [loginUser, setLoginUser] = useState({
-        username: "",
-        password: ""
-    });
-
+    useEffect(() => {
+        document.body.style.overflow = 'hidden'; 
+        return () => { document.body.style.overflow = 'auto'; }; 
+    }, []);
 
     const handleInputChange = (e, type) => {
         const { name, value } = e.target;
@@ -52,7 +47,6 @@ const LoginPopUp = ({ setShowLogin, setIsLoggedIn }) => {
             setCurrentState("Login");
         } catch (error) {
             toast.error("User registration failed!");
-            console.error("Error:", error);
         } finally {
             setLoading(false);
         }
@@ -76,7 +70,7 @@ const LoginPopUp = ({ setShowLogin, setIsLoggedIn }) => {
 
             if (userDetails) {
                 toast.success("Successfully logged in!");
-                setIsLoggedIn(true);  
+                setIsLoggedIn(true);
                 localStorage.setItem("username", userDetails.username);
                 setTimeout(() => {
                     setShowLogin(false);
@@ -85,7 +79,6 @@ const LoginPopUp = ({ setShowLogin, setIsLoggedIn }) => {
                 toast.error("Invalid username or password!");
             }
         } catch (error) {
-            console.error("Error fetching data", error);
             toast.error("Login failed!");
         } finally {
             setLoading(false);
@@ -93,82 +86,49 @@ const LoginPopUp = ({ setShowLogin, setIsLoggedIn }) => {
     };
 
     return (
-        <div className='login-popup'>
-            <form className='login-popup-container' onSubmit={currentState === "Sign Up" ? userRegister : userLogin}>
-                <div className="login-popup-title">
-                    <h2>{currentState}</h2>
-                    <img onClick={() => setShowLogin(false)} src={assets.cross_icon} alt="Close" />
-                </div>
+        <div className="login-popup-overlay"> {/* Background Overlay */}
+            <div className='login-popup'>
+                <form className='login-popup-container' onSubmit={currentState === "Sign Up" ? userRegister : userLogin}>
+                    <div className="login-popup-title">
+                        <h2>{currentState}</h2>
+                        <img onClick={() => setShowLogin(false)} src={assets.cross_icon} alt="Close" />
+                    </div>
 
-                <div className="login-popup-inputs">
+                    <div className="login-popup-inputs">
+                        {currentState === "Login" ? (
+                            <>
+                                <input type="text" name="username" placeholder='Enter your username' value={loginUser.username} required onChange={(e) => handleInputChange(e, "login")} />
+                                <input type="password" name="password" placeholder='Enter your password' value={loginUser.password} required onChange={(e) => handleInputChange(e, "login")} />
+                            </>
+                        ) : (
+                            <>
+                                <input type="text" name="username" placeholder='Your username' value={registerValues.username} required onChange={(e) => handleInputChange(e, "register")} />
+                                <input type="email" name="email" placeholder='Enter your email' value={registerValues.email} required onChange={(e) => handleInputChange(e, "register")} />
+                                <input type="password" name="password" placeholder='Enter your password' value={registerValues.password} required onChange={(e) => handleInputChange(e, "register")} />
+                            </>
+                        )}
+                    </div>
+
+                    <button className='log-btn' type="submit" disabled={loading}>
+                        {loading ? "Processing..." : (currentState === 'Sign Up' ? "Create your account" : "Login")}
+                    </button>
+
+                    <div className="login-popup-condition">
+                        <input type="checkbox" required />
+                        <p>By continuing, I agree to the terms of use & privacy policy</p>
+                    </div>
+
                     {currentState === "Login" ? (
-                        <>
-                            <input 
-                                type="text" 
-                                name="username"
-                                placeholder='Enter your username' 
-                                value={loginUser.username} 
-                                required 
-                                onChange={(e) => handleInputChange(e, "login")}
-                            />
-                            <input 
-                                type="password" 
-                                name="password"
-                                placeholder='Enter your password' 
-                                value={loginUser.password} 
-                                required 
-                                onChange={(e) => handleInputChange(e, "login")}
-                            />
-                        </>
+                        <p>Create a new account? <span onClick={() => setCurrentState("Sign Up")}>Click here</span></p>
                     ) : (
-                        <>
-                            <input 
-                                type="text" 
-                                name="username"
-                                placeholder='Your username' 
-                                value={registerValues.username} 
-                                required 
-                                onChange={(e) => handleInputChange(e, "register")}
-                            />
-                            <input 
-                                type="email" 
-                                name="email"
-                                placeholder='Enter your email' 
-                                value={registerValues.email} 
-                                required 
-                                onChange={(e) => handleInputChange(e, "register")}
-                            />
-                            <input 
-                                type="password" 
-                                name="password"
-                                placeholder='Enter your password' 
-                                value={registerValues.password} 
-                                required 
-                                onChange={(e) => handleInputChange(e, "register")}
-                            />
-                        </>
+                        <p>Already have an account? <span onClick={() => setCurrentState("Login")}>Login here</span></p>
                     )}
-                </div>
+                </form>
 
-                <button className='log-btn' type="submit" disabled={loading}>
-                    {loading ? "Processing..." : (currentState === 'Sign Up' ? "Create your account" : "Login")}
-                </button>
-
-                <div className="login-popup-condition">
-                    <input type="checkbox" required />
-                    <p>By continuing, I agree to the terms of use & privacy policy</p>
-                </div>
-
-                {currentState === "Login" ? (
-                    <p>Create a new account? <span onClick={() => setCurrentState("Sign Up")}>Click here</span></p>
-                ) : (
-                    <p>Already have an account? <span onClick={() => setCurrentState("Login")}>Login here</span></p>
-                )}
-            </form>
-
-            <ToastContainer />
+                <ToastContainer />
+            </div>
         </div>
     );
-}
+};
 
 export default LoginPopUp;

@@ -1,0 +1,43 @@
+.user-list-container {
+    padding: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .user-list-container .title{
+    width: 100%;
+    background-color: green;
+    padding: 10px;
+  }
+
+  .title h2{
+    color: white;
+    text-align: center;
+  }
+  
+  .user-list h2 {
+    text-align: center;
+ 
+  }
+  
+  .user-item {
+    border: 1px solid #ddd;
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 5px;
+  }
+  
+  .user-details p {
+    margin: 5px 0;
+  }
+  
+  .loading {
+    text-align: center;
+    font-size: 20px;
+  }
+  
+  .error {
+    color: red;
+    text-align: center;
+  }
+  

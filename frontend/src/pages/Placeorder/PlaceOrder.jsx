@@ -5,7 +5,6 @@ import { StoreContext } from '../../context/StoreContext';
 const PlaceOrder = () => {
     const { getTotalCartAmount } = useContext(StoreContext);
     const [orders, setOrders] = useState({
-        id: 0,
         first_name: "",
         last_name: "",
         email: "",
@@ -15,7 +14,7 @@ const PlaceOrder = () => {
         country: "",
         zip_code: "",
         phone_number: "",
-        total: 0, // Initialize with 0 to make sure it's always a number
+        total: "",
     });
 
     const handleInputChange = (e) => {
@@ -35,46 +34,48 @@ const PlaceOrder = () => {
             }
         }
 
-        // Calculate total amount with delivery fee (if cart is not empty)
-        const totalAmount = getTotalCartAmount() + (getTotalCartAmount() === 0 ? 0 : 2); // Add delivery fee if not empty
+        const totalAmount = getTotalCartAmount() + (getTotalCartAmount() === 0 ? 0 : 2); // Calculate the total with delivery fee
 
-        // Update the orders state with the calculated total
-        setOrders((prevOrders) => ({
-            ...prevOrders,
-            total: totalAmount,
-        }));
+        setOrders((prevOrders) => {
+            const updatedOrders = {
+                ...prevOrders,
+                total: totalAmount,
+            };
 
-        // Prepare the order payload
-        const orderPayload = {
-            ...orders,
-            total_amount: totalAmount, // Use the updated total amount here
-        };
+            const orderPayload = {
+                ...updatedOrders,
+                total_amount: totalAmount,
+            };
 
-        // Make the POST request
-        fetch("http://127.0.0.1:8000/orders/", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(orderPayload),
-        })
-            .then((response) => {
-                if (!response.ok) {
-                    return response.json().then((err) => {
-                        throw new Error(JSON.stringify(err));
-                    });
-                }
-                return response.json();
+            fetch("http://127.0.0.1:8000/orders/", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(orderPayload),
             })
-            .then((data) => {
-                console.log("Order Response:", data);
-                alert("Order successfully placed!");
-            })
-            .catch((error) => {
-                console.error("Error:", error);
-                alert("There was an error placing the order. Please try again.");
-            });
+                .then((response) => {
+                    if (!response.ok) {
+                        return response.json().then((err) => {
+                            throw new Error(JSON.stringify(err));
+                        });
+                    }
+                    return response.json();
+                })
+                .then((data) => {
+                    console.log("Order Response:", data);
+                    alert("Order successfully placed!");
+                })
+                .catch((error) => {
+                    console.error("Error:", error);
+                    alert("There was an error placing the order. Please try again.");
+                });
+
+            return updatedOrders; // Return the updated orders state
+        });
     };
+
+    const totalAmount = getTotalCartAmount() + (getTotalCartAmount() === 0 ? 0 : 2); // Calculate the total dynamically
 
     return (
         <form className="place-order" onSubmit={orderList}>
@@ -175,7 +176,7 @@ const PlaceOrder = () => {
                     <hr />
                     <div className="cart-total-details">
                         <b>Total</b>
-                        <b>₹ {orders.total}</b>
+                        <b>₹ {totalAmount}</b> {/* Dynamically calculated total */}
                     </div>
                     <button type="submit">PROCEED TO PAYMENT</button>
                 </div>

@@ -8,13 +8,13 @@ import About from '../../comonents/About/About'
 
 
 
-const Home = ({ setCategory }) => {
+const Home = ({setCategory }) => {
 
   
   return (
     <div>
       <Header/>
-      <ExploreMenu category={category} setCategory={setCategory} />
+      <ExploreMenu setCategory={setCategory} />
       {/* <FoodDisplay category={category} />  */}
       <About/>
     </div>

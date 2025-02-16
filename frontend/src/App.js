@@ -1,7 +1,6 @@
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
 import Home from './pages/Home/home';
-import About from './comonents/About/About';
 
 import Navbar from './comonents/navbar/Navbar';
 import Footer from './comonents/Footer/Footer';
@@ -25,7 +24,7 @@ function App() {
 
       <div className="app">
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Home setCategory={setCategory} />} />
           <Route path="/cart" element={<Cart isLoggedIn={isLoggedIn} setShowLogin={setShowLogin} />} />
           <Route path="/order" element={<PlaceOrder />} />
           <Route path="/menu" element={<FoodDisplay category={category} />} />

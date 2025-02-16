@@ -13,7 +13,6 @@ const Navbar = ({ setShowLogin, isLoggedIn, setIsLoggedIn }) => {
     const [username, setUsername] = useState("");
 
     useEffect(() => {
-   
         const storedUsername = localStorage.getItem("username");
         if (storedUsername) {
             setUsername(storedUsername);
@@ -32,8 +31,8 @@ const Navbar = ({ setShowLogin, isLoggedIn, setIsLoggedIn }) => {
             <ul className="navbar-menu">
                 <Link to={'/'}  onClick={() => setMenu("home")} className={menu === "home" ? "active" : ""}>Home</Link>
                 <Link to={'/menu'} onClick={() => setMenu("menu")} className={menu === "menu" ? "active" : ""}>Menu</Link>
-                <a href='#about' onClick={() => setMenu("about")} className={menu === "about" ? "active" : ""}>About</a>
-                <a href='#footer' onClick={() => setMenu("contact")} className={menu === "contact" ? "active" : ""}>Contact</a>
+                <a href="#about" onClick={() => setMenu("about")} className={menu === "about" ? "active" : ""}>About</a>
+                <a href="#footer" onClick={() => setMenu("contact")} className={menu === "contact" ? "active" : ""}>Contact</a>
             </ul>
             <div className="navbar-right icons">
                 <IoSearch style={{fontSize:"30px"}} />

@@ -24,14 +24,13 @@ function App() {
       <Navbar setShowLogin={setShowLogin} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
 
       <div className="app">
-      <Routes>
-        <Route path="/about" element={<About />} />
-
+        <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/cart" element={<Cart isLoggedIn={isLoggedIn} setShowLogin={setShowLogin} />} />
           <Route path="/order" element={<PlaceOrder />} />
           <Route path="/menu" element={<FoodDisplay category={category} />} />
         </Routes>
+
       </div>
 
       <Footer />

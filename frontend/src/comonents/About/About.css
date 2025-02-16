@@ -1,0 +1,121 @@
+body {
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+  line-height: 1.6;
+  color: #333; 
+}
+
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.about-hero {
+  background-image: url('./food.jpg');
+  background-size: cover;
+  background-position: center;
+  color: white;
+  text-align: center;
+  padding: 100px 0;
+}
+
+.hero-content {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.about-hero h1 {
+  font-size: 3em;
+  margin-bottom: 20px;
+  color: #22ce3f;
+}
+
+.about-hero p {
+  font-size: 1.4em;color: black;
+  
+}
+
+.about-story {
+  padding: 40px 0;
+  overflow: hidden;
+}
+
+.story-image {
+  float: left;
+  width: 45%;
+  margin-right: 30px;
+  margin-bottom: 20px;
+}
+
+.story-image img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px; 
+}
+
+.story-text {
+  width: 100%;
+  float: left;
+  margin-bottom: 20px;
+  font-family: sans-serif,Arial, Helvetica, sans-serif;
+  padding: 20px;
+  font-weight: 500;
+  font-size: 20px;
+}
+
+.about-story h2 {
+  font-size: 2.5em;
+  margin-bottom: 20px;
+  color: #22ce3f;
+}
+
+.about-story p {
+  font-size: 1.1em;
+  line-height: 1.8;
+}
+
+footer {
+  background-color: whitesmoke;
+  color: #333;
+  text-align: center;
+  padding: 20px 0;
+  clear: both;
+  margin-top: 40px;
+}
+
+@media (max-width: 768px) {
+  .story-image, .story-text {
+    float: none;
+    width: 100%;
+    margin: 0 0 20px;
+  }
+  
+  .about-hero {
+    padding: 60px 0;
+  }
+  
+  .about-hero h1 {
+    font-size: 2.5em;
+  }
+
+  .about-story p {
+    font-size: 1.1em;
+    line-height: 1.8;
+  }
+}
+
+@media (max-width: 480px) {
+  .about-hero h1 {
+    font-size: 2em;
+  }
+  
+  .about-story h2 {
+    font-size: 1.8em;
+  }
+  
+  .about-story p {
+    font-size: 1em;
+  }
+}

@@ -1,6 +1,8 @@
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
 import Home from './pages/Home/home';
+import About from './comonents/About/About';
+
 import Navbar from './comonents/navbar/Navbar';
 import Footer from './comonents/Footer/Footer';
 import FoodDisplay from './comonents/FoodDisplay/FoodDisplay';
@@ -22,7 +24,9 @@ function App() {
       <Navbar setShowLogin={setShowLogin} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
 
       <div className="app">
-        <Routes>
+      <Routes>
+        <Route path="/about" element={<About />} />
+
           <Route path="/" element={<Home />} />
           <Route path="/cart" element={<Cart isLoggedIn={isLoggedIn} setShowLogin={setShowLogin} />} />
           <Route path="/order" element={<PlaceOrder />} />

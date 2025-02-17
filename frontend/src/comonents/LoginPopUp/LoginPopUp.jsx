@@ -15,7 +15,6 @@ const LoginPopUp = ({ setShowLogin, setIsLoggedIn }) => {
         return () => { document.body.style.overflow = 'auto'; }; 
     }, []);
       
-
     const handleInputChange = (e, type) => {
         const { name, value } = e.target;
         if (type === "register") {

@@ -3,7 +3,7 @@ import './Cart.css';
 import { StoreContext } from '../../context/StoreContext';
 import { useNavigate } from 'react-router-dom';
 
-const Cart = ({ isLoggedIn, setShowLogin }) => {  // Accept isLoggedIn & setShowLogin as props
+const Cart = ({ isLoggedIn, setShowLogin }) => {
     const { cartItem, food_list, removeFromCart, getTotalCartAmount } = useContext(StoreContext);
     const navigate = useNavigate();
 
@@ -11,7 +11,7 @@ const Cart = ({ isLoggedIn, setShowLogin }) => {  // Accept isLoggedIn & setShow
         if (isLoggedIn) {
             navigate('/order');
         } else {
-            setShowLogin(true); // ✅ Show login popup if not logged in
+            setShowLogin(true); // ✅ 
         }
     };
 

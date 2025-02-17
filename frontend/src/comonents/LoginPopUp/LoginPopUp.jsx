@@ -14,6 +14,7 @@ const LoginPopUp = ({ setShowLogin, setIsLoggedIn }) => {
         document.body.style.overflow = 'hidden'; 
         return () => { document.body.style.overflow = 'auto'; }; 
     }, []);
+      
 
     const handleInputChange = (e, type) => {
         const { name, value } = e.target;
@@ -24,10 +25,45 @@ const LoginPopUp = ({ setShowLogin, setIsLoggedIn }) => {
         }
     };
 
+    // Username validation (only allows letters, no numbers)
+    const validateUsername = (username) => {
+        const usernameRegex = /^[a-zA-Z]{3,15}$/; // Only allows letters (3 to 15 characters)
+        return usernameRegex.test(username);
+    };
+
+    // Password validation (length, and includes at least one number, one lowercase, and one uppercase)
+    const validatePassword = (password) => {
+        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d@$!%*?&]{8,}$/;
+        return passwordRegex.test(password);
+    };
+
+    // Email validation (using regex)
+    const validateEmail = (email) => {
+        const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        return emailRegex.test(email);
+    };
+
     const userRegister = async (e) => {
         e.preventDefault();
+
+        // Validate username, email, and password
         if (!registerValues.username || !registerValues.email || !registerValues.password) {
             toast.error("Please fill in all fields!");
+            return;
+        }
+
+        if (!validateUsername(registerValues.username)) {
+            toast.error("Username must be between 3-15 characters and only contain letters (no numbers or special characters).");
+            return;
+        }
+
+        if (!validateEmail(registerValues.email)) {
+            toast.error("Please enter a valid email address.");
+            return;
+        }
+
+        if (!validatePassword(registerValues.password)) {
+            toast.error("Password must be at least 8 characters long and include at least one uppercase letter, one lowercase letter, and one number.");
             return;
         }
 
@@ -56,6 +92,16 @@ const LoginPopUp = ({ setShowLogin, setIsLoggedIn }) => {
         e.preventDefault();
         if (!loginUser.username || !loginUser.password) {
             toast.error("Please enter both username and password!");
+            return;
+        }
+
+        if (!validateUsername(loginUser.username)) {
+            toast.error("Invalid username. It must be between 3-15 characters and only contain letters.");
+            return;
+        }
+
+        if (!validatePassword(loginUser.password)) {
+            toast.error("Invalid password. It must be at least 8 characters long, containing at least one uppercase letter, one lowercase letter, and one number.");
             return;
         }
 

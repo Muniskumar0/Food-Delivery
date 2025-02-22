@@ -24,19 +24,16 @@ const LoginPopUp = ({ setShowLogin, setIsLoggedIn }) => {
         }
     };
 
-    // Username validation (only allows letters, no numbers)
     const validateUsername = (username) => {
-        const usernameRegex = /^[a-zA-Z]{3,15}$/; // Only allows letters (3 to 15 characters)
+        const usernameRegex = /^[a-zA-Z]{3,15}$/;
         return usernameRegex.test(username);
     };
 
-    // Password validation (length, and includes at least one number, one lowercase, and one uppercase)
     const validatePassword = (password) => {
-        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d@$!%*?&]{8,}$/;
+        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
         return passwordRegex.test(password);
     };
 
-    // Email validation (using regex)
     const validateEmail = (email) => {
         const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
         return emailRegex.test(email);
@@ -45,7 +42,6 @@ const LoginPopUp = ({ setShowLogin, setIsLoggedIn }) => {
     const userRegister = async (e) => {
         e.preventDefault();
 
-        // Validate username, email, and password
         if (!registerValues.username || !registerValues.email || !registerValues.password) {
             toast.error("Please fill in all fields!");
             return;
@@ -62,7 +58,7 @@ const LoginPopUp = ({ setShowLogin, setIsLoggedIn }) => {
         }
 
         if (!validatePassword(registerValues.password)) {
-            toast.error("Password must be at least 8 characters long and include at least one uppercase letter, one lowercase letter, and one number.");
+            toast.error("Password must be at least 8 characters long and include at least one uppercase letter, one lowercase letter, one digit, and one special character.");
             return;
         }
 
@@ -100,7 +96,7 @@ const LoginPopUp = ({ setShowLogin, setIsLoggedIn }) => {
         }
 
         if (!validatePassword(loginUser.password)) {
-            toast.error("Invalid password. It must be at least 8 characters long, containing at least one uppercase letter, one lowercase letter, and one number.");
+            toast.error("Invalid password. It must be at least 8 characters long, containing at least one uppercase letter, one lowercase letter, one digit, and one special character.");
             return;
         }
 
@@ -131,7 +127,7 @@ const LoginPopUp = ({ setShowLogin, setIsLoggedIn }) => {
     };
 
     return (
-        <div className="login-popup-overlay"> {/* Background Overlay */}
+        <div className="login-popup-overlay"> 
             <div className='login-popup'>
                 <form className='login-popup-container' onSubmit={currentState === "Sign Up" ? userRegister : userLogin}>
                     <div className="login-popup-title">

@@ -7,7 +7,6 @@ const FoodItem = ({ id, name, price, description, image }) => {
   const { cartItem, addToCart, removeFromCart } = useContext(StoreContext);
   const [isExpanded, setIsExpanded] = useState(false);
 
-  // Max characters for description before truncating
   const MAX_DESCRIPTION_LENGTH = 150;
 
   const toggleDescription = () => {
@@ -21,7 +20,6 @@ const FoodItem = ({ id, name, price, description, image }) => {
   return (
     <div className='food-item'>
       <div className="food-item-img-container">
-        {/* If image is available, show it, else show a default image */}
         <img className='food-item-img' src={image || assets.placeholder_image} alt={name} />
         
         {
@@ -58,7 +56,6 @@ const FoodItem = ({ id, name, price, description, image }) => {
         <p className='food-item-desp'>
           {isExpanded ? description : truncatedDescription}
         </p>
-        {/* Show 'Read more' or 'Read less' based on whether the description is expanded */}
         {description.length > MAX_DESCRIPTION_LENGTH && (
           <p className="read-more" onClick={toggleDescription}>
             {isExpanded ? 'Read less' : 'Read more'}

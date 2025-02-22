@@ -9,6 +9,10 @@ import { useState } from 'react';
 import LoginPopUp from './comonents/LoginPopUp/LoginPopUp';
 import Cart from './pages/Cart/Cart';
 import PlaceOrder from './pages/Placeorder/PlaceOrder';
+import PaymentPage from './pages/Payment/Payment';
+import DeliveryStatus from './pages/Delivery/DeliveryStatus';
+import About from './comonents/About/About';
+import Contact from './comonents/Contact/Contact';
 
 function App() {
   const [category, setCategory] = useState("All");
@@ -28,9 +32,15 @@ function App() {
           <Route path="/cart" element={<Cart isLoggedIn={isLoggedIn} setShowLogin={setShowLogin} />} />
           <Route path="/order" element={<PlaceOrder />} />
           <Route path="/menu" element={<FoodDisplay category={category} />} />
+          <Route path="/payment" element={<PaymentPage />} />
+          <Route path="/delivery-status" element={<DeliveryStatus />} /> 
+          <Route path="/about" element={<About />} /> 
+          <Route path="/contact" element={<Contact />} /> 
+
         </Routes>
 
       </div>
+      
 
       <Footer />
     </>

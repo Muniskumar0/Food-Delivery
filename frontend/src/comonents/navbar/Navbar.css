@@ -189,11 +189,11 @@ img:hover {
     }
 }
 
-@media (max-width: 770px) {
+/* @media (max-width: 770px) {
     .navbar-menu {
         display: none;
     }
-}
+} */
 
 @media screen and (max-width: 450px) {
     .navbar {

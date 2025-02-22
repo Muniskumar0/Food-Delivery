@@ -1,42 +1,63 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const axios = require('axios');
-const app = express();
-const port = 8000;
+import React, { useState } from 'react';
+import './Payment.css';
 
-app.use(bodyParser.json());
+const PaymentPage = () => {
+  const [paymentMethod, setPaymentMethod] = useState('');
+  const [paymentStatus, setPaymentStatus] = useState('');
 
-// Google Pay Order Creation
-app.post('/create-googlepay-order', async (req, res) => {
-  const { amount } = req.body;
+  const handlePaymentMethodChange = (e) => {
+    setPaymentMethod(e.target.value);
+  };
 
-  // This is a simulated response; integrate the actual Google Pay API here.
-  const paymentUrl = `https://pay.google.com/gp/p/gateway?amount=${amount}`;
-  
-  res.json({ paymentUrl });
-});
+  const handlePaymentSubmit = (e) => {
+    e.preventDefault();
 
-// PhonePe Order Creation
-app.post('/create-phonepe-order', async (req, res) => {
-  const { amount } = req.body;
+    if (paymentMethod === 'creditCard') {
+      setPaymentStatus('Processing payment...');
+      setTimeout(() => {
+        setPaymentStatus('Payment successful!');
+      }, 2000);
+    } else if (paymentMethod === 'paypal') {
+      setPaymentStatus('Redirecting to PayPal...');
+      setTimeout(() => {
+        setPaymentStatus('Payment successful!');
+      }, 2000);
+    } else {
+      setPaymentStatus('Please select a payment method.');
+    }
+  };
 
-  // Simulated URL, replace with actual PhonePe API integration
-  const paymentUrl = `https://www.phonepe.com/pay?amount=${amount}`;
+  return (
+    <div className="payment-page">
+      <h1>Payment Page</h1>
+      <form onSubmit={handlePaymentSubmit} className="payment-form">
+        <div className="payment-method">
+          <label>
+            <input
+              type="radio"
+              name="paymentMethod"
+              value="creditCard"
+              onChange={handlePaymentMethodChange}
+            />
+            Credit Card
+          </label>
+          <label>
+            <input
+              type="radio"
+              name="paymentMethod"
+              value="paypal"
+              onChange={handlePaymentMethodChange}
+            />
+            PayPal
+          </label>
+        </div>
 
-  res.json({ paymentUrl });
-});
+        <button type="submit">Pay Now</button>
+      </form>
 
-// Paytm Order Creation
-app.post('/create-paytm-order', async (req, res) => {
-  const { amount } = req.body;
+      {paymentStatus && <p>{paymentStatus}</p>}
+    </div>
+  );
+};
 
-  // Simulated URL, replace with actual Paytm API integration
-  const paymentUrl = `https://paytm.com/checkout?amount=${amount}`;
-
-  res.json({ paymentUrl });
-});
-
-// Start the server
-app.listen(port, () => {
-  console.log(`Server running on http://localhost:${port}`);
-});
+export default PaymentPage;

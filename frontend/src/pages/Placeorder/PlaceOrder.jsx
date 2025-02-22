@@ -1,6 +1,10 @@
 import React, { useContext, useState } from 'react';
 import './PlaceOrder.css';
 import { StoreContext } from '../../context/StoreContext';
+import { useNavigate } from 'react-router-dom';  
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';  
+
 
 const PlaceOrder = () => {
   const { getTotalCartAmount } = useContext(StoreContext);
@@ -17,6 +21,7 @@ const PlaceOrder = () => {
     total: "",
   });
   const [errors, setErrors] = useState({});
+  const navigate = useNavigate();  
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -26,21 +31,18 @@ const PlaceOrder = () => {
   const validateForm = () => {
     const newErrors = {};
 
-    // Required field validation
-    const requiredFields = ['first_name', 'email', 'street', 'city', 'state', 'zip_code', 'country', 'phone_number'];
+    const requiredFields = ['first_name','last_name', 'email', 'street', 'city', 'state', 'zip_code', 'country', 'phone_number'];
     requiredFields.forEach((field) => {
       if (!orders[field]) {
         newErrors[field] = `${field.replace('_', ' ')} is required`;
       }
     });
 
-    // Email format validation
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     if (orders.email && !emailRegex.test(orders.email)) {
       newErrors.email = 'Please enter a valid email address';
     }
 
-    // Phone number format validation (example: only numbers and a specific length)
     const phoneRegex = /^[0-9]{10}$/;
     if (orders.phone_number && !phoneRegex.test(orders.phone_number)) {
       newErrors.phone_number = 'Phone number must be 10 digits';
@@ -50,7 +52,7 @@ const PlaceOrder = () => {
   };
 
   const orderList = (e) => {
-    e.preventDefault(); // Prevent page refresh
+    e.preventDefault();
 
     const validationErrors = validateForm();
     if (Object.keys(validationErrors).length > 0) {
@@ -58,8 +60,7 @@ const PlaceOrder = () => {
       return;
     }
 
-    // Calculate total amount with delivery fee
-    const totalAmount = getTotalCartAmount() + (getTotalCartAmount() === 0 ? 0 : 2);
+    const totalAmount = getTotalCartAmount() + (getTotalCartAmount() === 0 ? 0 : 20);
 
     setOrders((prevOrders) => {
       const updatedOrders = {
@@ -89,23 +90,24 @@ const PlaceOrder = () => {
         })
         .then((data) => {
           console.log("Order Response:", data);
-          alert("Order successfully placed!");
-          // Store the login state in localStorage if successful (optional)
-          localStorage.setItem("isLoggedIn", "true");
+          toast.success("Order successfully placed!");
+
+          
+          navigate('/payment');  
         })
         .catch((error) => {
           console.error("Error:", error);
-          alert("There was an error placing the order. Please try again.");
+          toast.error("There was an error placing the order. Please try again.");
         });
 
-      return updatedOrders; // Return the updated orders state
+      return updatedOrders; 
     });
   };
 
-
-  const totalAmount = getTotalCartAmount() + (getTotalCartAmount() === 0 ? 0 : 2);
+  const totalAmount = getTotalCartAmount() + (getTotalCartAmount() === 0 ? 0 : 20);
 
   return (
+    <>
     <form className="place-order" onSubmit={orderList}>
       <div className="place-order-left">
         <p className="title">Delivery Information</p>
@@ -123,9 +125,9 @@ const PlaceOrder = () => {
             name="last_name"
             placeholder="Last name"
             value={orders.last_name}
-            required
             onChange={handleInputChange}
           />
+          {errors.first_name && <span className="error">{errors.last_name}</span>}
         </div>
         <input
           type="email"
@@ -199,7 +201,7 @@ const PlaceOrder = () => {
           <hr />
           <div className="cart-total-details">
             <p>Delivery Fee</p>
-            <p>₹ {getTotalCartAmount() === 0 ? 0 : 2}</p>
+            <p>₹ {getTotalCartAmount() === 0 ? 0 : 20}</p>
           </div>
           <hr />
           <div className="cart-total-details">
@@ -210,6 +212,8 @@ const PlaceOrder = () => {
         </div>
       </div>
     </form>
+    <ToastContainer/>
+    </>
   );
 };
 

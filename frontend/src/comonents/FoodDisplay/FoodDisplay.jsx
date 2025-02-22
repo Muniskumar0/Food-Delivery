@@ -7,16 +7,35 @@ const FoodDisplay = () => {
     const { food_list = [] } = useContext(StoreContext);
 
     const [activeCategory, setActiveCategory] = useState('All Category');
+    const [randomFoodItems, setRandomFoodItems] = useState([]);
 
     useEffect(() => {
         console.log("Updated food_list in context:", food_list);
+
+        const shuffleArray = (array) => {
+            const shuffled = [...array];
+            for (let i = shuffled.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+            }
+            return shuffled;
+        };
+
+        const getRandomFoodItems = () => {
+            const shuffledList = shuffleArray(food_list);
+            const randomCount = 100;
+            setRandomFoodItems(shuffledList.slice(0, randomCount));
+        };
+
+        getRandomFoodItems();
+
     }, [food_list]);
 
     const handleCategoryClick = (category) => {
         setActiveCategory(category);
     };
 
-    const filteredFoodItems = food_list.filter((item) => {
+    const filteredFoodItems = randomFoodItems.filter((item) => {
         return activeCategory === 'All Category' || item.category === activeCategory;
     });
 
@@ -24,17 +43,23 @@ const FoodDisplay = () => {
         <>
             <div className="menu-category">
                 <p className={`category-item All ${activeCategory === 'All Category' ? 'active' : ''}`} onClick={() => handleCategoryClick('All Category')}>
-                    All Category</p>
+                    All Category
+                </p>
                 <p className={`category-item ${activeCategory === 'Pure Veg' ? 'active' : ''}`} onClick={() => handleCategoryClick('Pure Veg')}>
-                    Pure Veg</p>
+                    Pure Veg
+                </p>
                 <p className={`category-item ${activeCategory === 'Non Veg' ? 'active' : ''}`} onClick={() => handleCategoryClick('Non Veg')}>
-                    Non Veg</p>
+                    Non Veg
+                </p>
                 <p className={`category-item ${activeCategory === 'Fast Food' ? 'active' : ''}`} onClick={() => handleCategoryClick('Fast Food')}>
-                    Fast Food</p>
+                    Fast Food
+                </p>
                 <p className={`category-item ${activeCategory === 'Sweets' ? 'active' : ''}`} onClick={() => handleCategoryClick('Sweets')}>
-                    Sweets</p>
+                    Sweets
+                </p>
                 <p className={`category-item ${activeCategory === 'Cake' ? 'active' : ''}`} onClick={() => handleCategoryClick('Cake')}>
-                    Cake</p>
+                    Cake
+                </p>
             </div>
 
             <div className="food-display" id="food-display">

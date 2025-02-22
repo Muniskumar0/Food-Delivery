@@ -1,7 +1,7 @@
 
 import React from 'react';
 import './About.css';
-// import Food from "./food.jpg"
+import bike from "./bike.png"
 
 
 const About = () => {
@@ -10,20 +10,19 @@ const About = () => {
 
       <section className="about-hero">
         <div className="hero-content">
-          <h1>About MAVY</h1>
-          <p>It's not just Food, It's an Experience.</p>
+          <marquee direction="right">
+            <img src={bike} alt="bike" />
+          </marquee>
+          
         </div>
       </section>
 
       <section className="about-story">
         <div className="container">
-          {/* <div className="story-image">
-            <img src={Food} alt="MAVY Restaurant" />
-          </div> */}
           <div className="story-text">
             <h2>Our Story</h2>
             <p>
-              At MAVY, we believe that dining is more than just sustenance; it's an immersive experience that engages all your senses. Established in 2023, our platform was born from a passion for delivering exceptional food experiences.
+              At MAVY, we believe that dining is more than just sustenance; it's an immersive experience that engages all your senses. Established in 2025, our platform was born from a passion for delivering exceptional food experiences.
             </p>
             <p>
               We offer a wide variety of vegetarian, non-vegetarian, and dessert options to satisfy every palate. From fast food favorites to authentic Chinese cuisine, our menu has something for everyone. We carefully curate our selections to bring you the best flavors from across Tamil Nadu.

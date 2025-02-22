@@ -13,17 +13,19 @@ body {
 }
 
 .about-hero {
-  background-image: url('./food.jpg');
-  background-size: cover;
-  background-position: center;
   color: white;
   text-align: center;
   padding: 100px 0;
 }
 
 .hero-content {
-  max-width: 600px;
+  width: 100%;
   margin: 0 auto;
+  height: 30vh;
+}
+
+.hero-content img{
+  height: 300px;
 }
 
 .about-hero h1 {
@@ -33,7 +35,8 @@ body {
 }
 
 .about-hero p {
-  font-size: 1.4em;color: black;
+  font-size: 1.2em;
+  color: black;
   
 }
 
@@ -104,6 +107,10 @@ footer {
     font-size: 1.1em;
     line-height: 1.8;
   }
+
+  .hero-content img{
+    height: 200px;
+  }
 }
 
 @media (max-width: 480px) {
@@ -117,5 +124,9 @@ footer {
   
   .about-story p {
     font-size: 1em;
+  }
+
+  .hero-content img{
+    height: 200px;
   }
 }

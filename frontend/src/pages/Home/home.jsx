@@ -1,12 +1,7 @@
-// import React, { useState } from 'react'
 import './home.css'
 import Header from '../../comonents/header/header'
 import ExploreMenu from '../../comonents/ExploreMenu/ExploreMenu'
-import About from '../../comonents/About/About'
-// import FoodDisplay from '../../comonents/FoodDisplay/FoodDisplay'
-
-
-
+import bike from "./bike.png"
 
 const Home = ({setCategory }) => {
 
@@ -15,8 +10,10 @@ const Home = ({setCategory }) => {
     <div>
       <Header/>
       <ExploreMenu setCategory={setCategory} />
-      {/* <FoodDisplay category={category} />  */}
-      <About/>
+      <marquee direction="right">
+            <img src={bike} alt="bike" style={{height:'300px'}} />
+      </marquee>
+      
     </div>
   )
 }

@@ -27,5 +27,12 @@
     .contact-details{
         display: grid;
         grid-template-columns: auto;
+        width: 100%;
     }
+
+    iframe{
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
 }

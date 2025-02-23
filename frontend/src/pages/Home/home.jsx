@@ -10,10 +10,9 @@ const Home = ({setCategory }) => {
     <div>
       <Header/>
       <ExploreMenu setCategory={setCategory} />
-      <marquee direction="right">
+      <marquee direction="right" className='bike-animation'>
             <img src={bike} alt="bike" style={{height:'300px'}} />
-      </marquee>
-      
+      </marquee>      
     </div>
   )
 }

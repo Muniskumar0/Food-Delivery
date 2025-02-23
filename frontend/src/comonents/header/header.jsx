@@ -15,7 +15,7 @@ const Header = () => {
   return (
     
 
-    <div className="header" id='home'>
+    <div className="header" id='home'> 
     <Carousel data-bs-theme="dark">
       <Carousel.Item intervel={2000}>
         <img

@@ -73,6 +73,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'food_project.wsgi.application'
 
+ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
